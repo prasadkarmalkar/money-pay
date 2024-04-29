@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../schemas/UserSchema");
+const { authenticateUser } = require("../middleware/userMiddleware");
 
 router.post('/', async (req, res)=>{
     const {firstName, lastName, email, password, avatar} = req.body;
@@ -26,6 +27,26 @@ router.post('/login', async (req, res)=>{
         }
     }else{
         res.status(401).json({message: 'Invalid credentials'});
+    }
+})
+
+router.put('/',authenticateUser, async (req, res)=>{
+    const {firstName, lastName, avatar} = req.body;
+    const user = await User.findById(req.userId);
+    if(user){
+        if ( firstName ) {
+            user.firstName = firstName
+        }
+        if ( lastName ) {
+            user.lastName = lastName
+        }
+        if ( avatar ) {
+            user.avatar = lastName
+        }
+        await user.save();
+        res.json({message: 'User updated successfully'})
+    }else{
+        res.status(404).json({message: 'Invalid credentials'});
     }
 })
 

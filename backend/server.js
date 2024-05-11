@@ -8,7 +8,9 @@ const PORT =  process.env.PORT || 5001;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // All routes.
-const userRoutes = require("./routes/UserRoutes");
+
+const rootRouter = require("./routes/index");
+
 
 const app = express();
 app.use(express.json());
@@ -20,7 +22,9 @@ mongoose.connect(MONGODB_URI).then(()=>{
     console.log('Unable to connect database');
 })
 
-app.use('/user', userRoutes);
+app.use('/api/v1', rootRouter);
+
+
 
 app.get('/',(req, res)=>{
     res.send('Hello World');

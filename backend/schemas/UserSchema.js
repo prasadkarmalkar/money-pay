@@ -29,10 +29,6 @@ const UserSchema = new Schema({
     },
     avatar: {
         type: String,
-    },
-    balance: {
-        type: Number,
-        default: 0
     }
 });
 

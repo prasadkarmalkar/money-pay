@@ -11,5 +11,5 @@ const BankSchema = new Schema({
     }
 });
 
-const User = model('user', UserSchema);
-module.exports = User;
+const Account = model('account', BankSchema);
+module.exports = Account;

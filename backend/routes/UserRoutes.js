@@ -4,7 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../schemas/UserSchema");
 const { authenticateUser } = require("../middleware/userMiddleware");
-const zod = require('zod')
+const zod = require('zod');
+const Account = require("../schemas/BankSchema");
 const userValidator = zod.object({
     firstName: zod.string(),
     lastName: zod.string(),
@@ -28,8 +29,13 @@ router.post('/', async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10);
     const myUser = new User({ firstName, lastName, email, password: hashPassword, avatar });
     myUser.save()
-        .then(user => {
+        .then(async ( user ) => {
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            const account = new Account({
+                userId: user._id,
+                balance: 1+ Math.random() * 1000
+            });
+            await account.save();
             res.status(201).json({ message: 'Account created successfully', id: user._id, token: token });
         }
         )

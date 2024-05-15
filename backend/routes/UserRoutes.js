@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
             const account = new Account({
                 userId: user._id,
-                balance: 1+ Math.random() * 1000
+                balance: parseInt( 1+ Math.random() * 1000 )
             });
             await account.save();
             res.status(201).json({ message: 'Account created successfully', id: user._id, token: token });

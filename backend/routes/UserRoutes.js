@@ -11,7 +11,6 @@ const userValidator = zod.object({
     lastName: zod.string(),
     email: zod.string().email(),
     password: zod.string(),
-    avatar: zod.string().url(),
 })
 
 router.post('/', async (req, res) => {

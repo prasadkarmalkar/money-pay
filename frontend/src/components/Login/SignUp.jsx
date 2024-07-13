@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+
 function SignUp() {
     const [userForm, setUserForm] = useState({
         email: '',
@@ -7,6 +8,10 @@ function SignUp() {
         lastName: '',
         password: '',
         confirmPassword: '',
+    });
+    const [formErrors, setFormErrors] = useState({
+      email: null,
+      error: null
     });
     const navigate = useNavigate();
 
@@ -33,14 +38,22 @@ function SignUp() {
                     lastName: '',
                     password: '',
                     confirmPassword: '',
-                })
+                });
+                setFormErrors({
+                  email: null,
+                  error: null
+                });
                 navigate('/');
+            } else if( request.status === 411 ) {
+                setFormErrors({...formErrors, email: response.message});
+            } else if ( request.status === 400 ) {
+              setFormErrors({...formErrors, error: response.message});
             } else {
-                alert('Something went wrong');
+              setFormErrors({...formErrors, error: 'Something went wrong! Please try again.'});
             }
-            
         } ).catch((e)=>{
             console.log(e);
+            setFormErrors({...formErrors, error: 'Something went wrong! Please try again.'});
         })   
     }
 
@@ -55,7 +68,7 @@ function SignUp() {
         Email ID<span className='text-red-500'>*</span> :
       </label>
       <input
-        className="px-4 py-2 rounded-xl border w-full"
+        className={`px-4 py-2 rounded-xl border w-full ${formErrors.email && 'outline-red-500 border border-red-500'}`}
         type="email"
         name="email"
         id="email"
@@ -64,6 +77,7 @@ function SignUp() {
         placeholder="Enter your Email ID"
         required
       />
+      { formErrors.email && <div className='text-red-500 ml-3 text-sm'>{formErrors.email}</div> }
     </div>
     <div className="mb-5">
       <label
@@ -142,7 +156,7 @@ function SignUp() {
       className="block m-auto px-20 text-white font-bold mt-10 bg-gradient-to-r from-fuchsia-600 to-pink-600 py-2 rounded-lg "
       type="submit"
     >
-      Sign In
+      Sign Up
     </button>
   </form>
   )

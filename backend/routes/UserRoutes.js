@@ -38,7 +38,10 @@ router.post('/', async (req, res) => {
             res.status(201).json({ message: 'Account created successfully', id: user._id, token: token });
         }
         )
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            res.status(500, 'Something went wrong! Please try again.');
+        });
 })
 
 const userLoginValidator = zod.object({

@@ -51,6 +51,7 @@ const userLoginValidator = zod.object({
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+    console.log( req.body );
     const { success } = userLoginValidator.safeParse(req.body);
     if (!success) {
         res.status(400).json({ message: 'Invalid input.' });
@@ -112,5 +113,14 @@ router.get('/', async (req, res) => {
         }))
     })
 })
+
+router.get('/currentUser', authenticateUser, async (req, res) => {
+    const user = await User.findById(req.userId);
+    if (user) {
+        res.status(200).json({ user });
+    } else {
+        res.status(404).json({ message: 'Invalid credentials' });
+    }
+});
 
 module.exports = router;

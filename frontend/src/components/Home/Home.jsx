@@ -1,10 +1,52 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaRupeeSign } from "react-icons/fa";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoArrowUpRight, GoArrowDownLeft } from "react-icons/go";
 import { IoIosSend } from "react-icons/io";
+import { UserContext } from '../../utils/userContext';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+    const {user, setUser } = useContext(UserContext);
+    const [fetchingUser, setFetchingUser] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        const auth_key = localStorage.getItem('auth_key');
+        console.log(auth_key);
+        if( auth_key ) {
+            if( !fetchingUser ) {
+                setFetchingUser( true );
+                fetch(`${import.meta.env.VITE_SERVER_URL}api/v1/user/currentUser`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('auth_key')}`
+                    }
+                }).then(async(request) => {
+                    const response = await request.json();
+                    if(request.status === 200) {
+                        setUser(response.user);
+                    }else {
+                        localStorage.removeItem('auth_key');
+                        setUser(null);
+                        navigate('/login');
+                    }
+                    setFetchingUser( false );
+                }).catch(e => {
+                    console.log(e);
+                    localStorage.removeItem('auth_key');
+                    setUser(null);
+                    navigate('/login');
+                    setFetchingUser( false );
+                })
+            }
+        } else {
+            console.log( 'navigating to login' );
+            setUser(null);
+            navigate('/login');
+        }
+    }, []);
   return (
     <div className="flex items-start">
       <div className=" w-96 p-5 rounded-3xl border shadow-md bg-white">

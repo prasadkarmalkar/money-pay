@@ -54,8 +54,8 @@ function Home() {
 				}
 		}, []);
 	return (
-		<div className="flex items-start">
-			<div className=" w-96 p-5 rounded-3xl border shadow-md bg-white">
+		<div className="flex-1 items-start justify-between gap-4">
+			<div className=" w-72 p-5 rounded-3xl border shadow-md bg-white">
 				<div className="flex">
 					<h4 className="flex-1 text-xl font-semibold">Balance</h4>
 					<button className="border p-2 rounded-md mr-2">

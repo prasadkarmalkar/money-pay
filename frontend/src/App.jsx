@@ -14,7 +14,7 @@ const router = createBrowserRouter([
 	{
 		path: '/',
 		element:
-		<div className="bg-gray-200 flex">
+		<div className="bg-gray-200 dark:bg-slate-700 flex">
 			<SideNav />
 			<Home />
 		</div>

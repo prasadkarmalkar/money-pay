@@ -1,4 +1,5 @@
 const {Schema, model, default: mongoose} = require('mongoose');
+const TransactionSchema = require('./TransactionSchema');
 
 const BankSchema = new Schema({
     userId:{
@@ -8,7 +9,8 @@ const BankSchema = new Schema({
     balance:{
         type: Number,
         default: 0
-    }
+    },
+    history: [TransactionSchema]
 });
 
 const Account = model('account', BankSchema);

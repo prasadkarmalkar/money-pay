@@ -4,7 +4,7 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import { GoArrowUpRight, GoArrowDownLeft } from "react-icons/go";
 import { IoIosSend } from "react-icons/io";
 import { UserContext } from '../../utils/userContext';
-import { useNavigate } from 'react-router-dom';
+import { createBrowserRouter, useNavigate } from 'react-router-dom';
 import PayModal from './PayModal';
 
 function Home() {
@@ -55,7 +55,7 @@ function Home() {
 				}
 		}, []);
 	return (
-		<div className="flex-1 flex gap-4 items-center md:px-4 justify-between dark:bg-slate-700 dark:text-slate-100">
+		<div className="flex-1 flex gap-4 items-center md:px-4 justify-between dark:bg-slate-700 dark:text-slate-100 ml-56 min-h-screen">
 			<div className=" w-72 p-5 rounded-3xl shadow-md bg-white dark:bg-slate-900">
 				<div className="flex">
 					<h4 className="flex-1 text-xl font-semibold">Balance</h4>

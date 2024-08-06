@@ -13,15 +13,13 @@ import { useState } from 'react';
 import { UserContext } from "./utils/userContext";
 import Profile from './components/Profile/Profile';
 import History from './components/History/History';
+import HomeContainer from './components/Home/HomeContainer';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: (
-		  <div className="bg-gray-200 dark:bg-slate-700 flex">
-			<SideNav />
-			<Outlet />
-		  </div>
+		  <HomeContainer />
 		),
 		children: [
 		  {
@@ -46,9 +44,11 @@ const router = createBrowserRouter([
 
 function App() {
 	const [user, setUser] = useState({});
+	const [balance, setBalance] = useState(0);
+	const [history, setHistory] = useState([]);
 
 	return (
-		<UserContext.Provider value={{ user, setUser }}>
+		<UserContext.Provider value={{ user, setUser, balance, setBalance, history, setHistory }}>
 			<RouterProvider router={router} />
         </UserContext.Provider>
 	);

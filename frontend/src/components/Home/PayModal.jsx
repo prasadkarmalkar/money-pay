@@ -4,7 +4,7 @@ import { IoIosSend } from 'react-icons/io';
 import { BsThreeDots } from 'react-icons/bs';
 
 function PayModal({balance}) {
-    const {user, setUser } = useContext(UserContext);
+    const {user } = useContext(UserContext);
 
     const [ payProcessing, setPayProcessing ] = useState(false);
 
@@ -58,7 +58,7 @@ function PayModal({balance}) {
         })
     }
 	return (
-		<form onSubmit={handlePayForm} className=' w-full p-10 rounded-3xl shadow-md mt-16 max-w-[650px] bg-white dark:bg-slate-900'>
+		<form onSubmit={handlePayForm} className=' w-full p-10 rounded-3xl shadow-md mt-16 max-w-[650px] bg-white dark:bg-gray-900'>
 			<div className=' w-full max-w-96 mx-auto shadow-lg rounded-3xl p-10 bg-gradient-to-r from-fuchsia-600 to-pink-600 -mt-16'>
 				<p className='text-center tracking-widest font-semibold'>
 					{user._id}
@@ -73,7 +73,7 @@ function PayModal({balance}) {
 			<div className='mt-5'>
 				<label htmlFor='to'>Pay to</label>
 				<input
-					className='block w-full rounded-xl px-10 py-2 bg-slate-200 dark:bg-slate-700'
+					className='block w-full rounded-xl px-10 py-2 bg-gray-200 dark:bg-gray-700'
 					type='email'
 					name='to'
 					id='to'
@@ -89,7 +89,7 @@ function PayModal({balance}) {
 				<div>
 					<label htmlFor='amount'>Amount</label>
 					<input
-						className='block w-full rounded-xl px-2 py-2 bg-slate-200 dark:bg-slate-700'
+						className='block w-full rounded-xl px-2 py-2 bg-gray-200 dark:bg-gray-700'
 						type='number'
 						name='amount'
 						id='amount'
@@ -101,7 +101,7 @@ function PayModal({balance}) {
 				<div>
 					<label htmlFor='reason'>Reason</label>
 					<input
-						className='block w-full rounded-xl px-2 py-2 bg-slate-200 dark:bg-slate-700'
+						className='block w-full rounded-xl px-2 py-2 bg-gray-200 dark:bg-gray-700'
 						type='text'
 						name='description'
 						id='description'

@@ -7,7 +7,7 @@ function Login() {
 
   return (
     <div className="min-h-screen bg-gray-200 flex justify-center items-center">
-      <div className="bg-white p-10 rounded-xl w-full max-w-screen-sm">
+      <div className="bg-white p-4 md:p-10 rounded-xl w-full max-w-screen-sm">
         <h1 className="text-center font-bold text-2xl">MoneyPay</h1>
         {isLogin ? (
 			<SignIn />

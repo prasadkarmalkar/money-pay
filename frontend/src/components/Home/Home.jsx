@@ -16,8 +16,8 @@ function Home() {
 			return balance;
 		}, [balance, currency]);
 	return (
-		<div className="flex-1 flex gap-4 items-center md:px-4 justify-between dark:bg-gray-700 dark:text-gray-100 ml-56 min-h-screen">
-			<div className=" w-72 p-5 rounded-3xl shadow-md bg-white dark:bg-gray-900">
+		<div className="flex-1 flex flex-wrap gap-4 items-center md:px-4 justify-between dark:bg-gray-700 dark:text-gray-100 md:ml-56 min-h-screen">
+			<div className="m-auto w-72 p-5 rounded-3xl shadow-md bg-white dark:bg-gray-900">
 				<div className="flex">
 					<h4 className="flex-1 text-xl font-semibold">Balance</h4>
 					<button onClick={()=>setCurrency('INR')} className={`border p-2 rounded-md mr-2 hover:bg-gray-900 hover:text-white dark:hover:bg-gray-100 dark:hover:text-gray-900 ${currency === 'INR' && 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'}`}>

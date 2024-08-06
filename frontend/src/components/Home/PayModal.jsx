@@ -65,10 +65,10 @@ function PayModal({balance}) {
 				<img className='absolute w-full rounded-3xl h-full top-0 bottom-0 left-0 right-0' src={gradientback} />
 				<div className='relative top-10'>
 					<p className='text-center tracking-widest font-semibold'>
-						{user._id}
+						{user?._id}
 					</p>
 					<h3 className='mt-5 ml-6 font-semibold text-2xl flex items-center'><BsCurrencyRupee /> {balance}</h3>
-					<h4 className={`mt-5 ml-6 font-bold flex justify-between items-center mr-5 ${showEmail ? 'tracking-normal text-sm' : 'tracking-wider uppercase'}`}>{showEmail ? user.email : user.firstName + ' ' + user.lastName} <span className='capitalize text-xs tracking-normal font-normal border border-white px-1 rounded-md py-0.5 cursor-pointer' onClick={()=> setShowEmail(!showEmail)}>{showEmail ? 'Show Name' : 'Show Email'}</span></h4>
+					<h4 className={`mt-5 ml-6 font-bold flex justify-between items-center mr-5 ${showEmail ? 'tracking-normal text-sm' : 'tracking-wider uppercase'}`}>{showEmail ? user?.email : user?.firstName + ' ' + user?.lastName} <span className='capitalize text-xs tracking-normal font-normal border border-white px-1 rounded-md py-0.5 cursor-pointer' onClick={()=> setShowEmail(!showEmail)}>{showEmail ? 'Show Name' : 'Show Email'}</span></h4>
 				</div>
 			</div>
 

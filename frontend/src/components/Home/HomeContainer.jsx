@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../utils/userContext';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SideNav from '../SideNav/SideNav';
+import { IoReorderFour } from 'react-icons/io5';
 
 function HomeContainer() {
 	const {user, setUser, balance, setBalance, history, setHistory } = useContext(UserContext);
@@ -52,9 +53,14 @@ function HomeContainer() {
 					navigate('/login');
 			}
 	}, []);
+
+	const [showNav, setShowNav] = useState(false);
 	return (
-		<div className="bg-gray-200 dark:bg-gray-700 flex">
-			<SideNav />
+		<div className="bg-gray-200 dark:bg-gray-700 flex flex-col md:flex-row">
+			<div className='flex justify-end text-3xl px-2 py-3 md:hidden'>
+				<IoReorderFour onClick={()=> setShowNav(true)} className='dark:bg-gray-100 dark:text-gray-900 bg-gray-900 text-gray-100 p-1 rounded-sm' />
+			</div>
+			<SideNav showNav={showNav} setShowNav={setShowNav} />
 			<Outlet />
 		</div>
 	)
